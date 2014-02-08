@@ -7,6 +7,9 @@ TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 
 STATIC_PATH = os.path.join(PROJECT_PATH,'static')
 
+DATABASE_PATH = os.path.join(PROJECT_PATH,'rango.db')
+
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -19,8 +22,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': DATABASE_PATH,                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -132,7 +135,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'rango',
@@ -168,3 +171,12 @@ LOGGING = {
         },
     }
 }
+
+#http://stackoverflow.com/questions/11708821/django-ipython-sqlite-complains-about-naive-datetime
+#ignore the following error when using ipython:
+    #/django/db/backends/sqlite3/base.py:50: RuntimeWarning:
+    #SQLite received a naive datetime (2012-11-02 11:20:15.156506) while time zone support is active.
+
+import warnings
+import exceptions
+warnings.filterwarnings("ignore", category=exceptions.RuntimeWarning, module='django.db.backends.sqlite3.base', lineno=53)
