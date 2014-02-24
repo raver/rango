@@ -15,4 +15,5 @@ urlpatterns = patterns('',
     url(r'^category/(?P<category_name_url>\w+)/add_page/$', views.add_page, name='add_page'),
     url(r'^category/(?P<category_name_url>\w+)/$',views.category, name='category'),
     url(r'^logout/$', views.user_logout, name='logout'),
+    url(r'^search/$', views.search, name='search'),
 )
