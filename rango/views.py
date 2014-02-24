@@ -29,9 +29,17 @@ def index(request):
     page_list = Page.objects.order_by('-views')[:5]
     context_dict = {'categories': category_list,'pages': page_list}
 
-    #### NEW CODE ####
+        # The following two lines are new.
+            # We loop through each category returned, and create a URL
+# attribute.
+# This attribute stores an encoded URL (e.g. spaces replaced
+# with underscores).
+    for category in category_list:
+        category.url = encode_url(category.name)
+
+#### NEW CODE ####
     if request.session.get('last_visit'):
-        # The session has a value for the last visit
+# The session has a value for the last visit
         last_visit_time = request.session.get('last_visit')
         visits = request.session.get('visits', 0)
         print ">>>> " + last_visit_time[:-7]
