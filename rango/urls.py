@@ -16,4 +16,6 @@ urlpatterns = patterns('',
     url(r'^category/(?P<category_name_url>\w+)/$',views.category, name='category'),
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^search/$', views.search, name='search'),
+    url(r'^like_category/$', views.like_category, name='like_category'),
+    url(r'^suggest_category/$', views.suggest_category, name='suggest_category'),
 )
